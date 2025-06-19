@@ -1,0 +1,10 @@
+SELECT 
+    student_id,
+    DATE_FORMAT(date, '%Y-%m') as month,
+    COUNT(DISTINCT counselor_id) as counselor_count,
+    COUNT(*) as appointment_count
+FROM appointments
+GROUP BY student_id, DATE_FORMAT(date, '%Y-%m')
+HAVING COUNT(DISTINCT counselor_id) > 1
+    AND COUNT(*) > 1
+ORDER BY student_id, month;
